@@ -2,6 +2,9 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Important: Update This File
+After every successful change (when the user confirms the changes are good), update this CLAUDE.md file to reflect any new architectural patterns, dependencies, commands, or project structure changes that future Claude instances should know about.
+
 ## Project Overview
 
 This is an AI procurements agent built with Python. The project is in its initial stages with a minimal setup containing a basic Python entry point.

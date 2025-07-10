@@ -1,0 +1,7 @@
+# Cursor Rules
+
+# Add your custom rules here to guide Cursor's AI behavior
+# Example:
+# - Use Python type hints for all function parameters and return types
+# - Follow PEP 8 style guidelines
+# - Prefer composition over inheritance
