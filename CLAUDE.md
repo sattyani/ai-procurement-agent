@@ -27,6 +27,19 @@ python main.py
 - Uses pyproject.toml for dependency management
 - Currently has no external dependencies
 
+## GitHub Actions Integration
+
+### Claude Code PR Reviews
+This repository is configured with GitHub Actions for automated Claude Code PR reviews:
+- Triggered by mentioning `@claude` in PR comments or issues
+- Requires GitHub App and Anthropic API key configuration
+- Workflow file: `.github/workflows/claude-code.yml`
+
+Required repository secrets:
+- `ANTHROPIC_API_KEY`: Your Anthropic API key
+- `APP_ID`: GitHub App ID  
+- `APP_PRIVATE_KEY`: Private key for the GitHub App
+
 ## Architecture Notes
 
 The project is currently a simple Python application with a single entry point. As this is an AI procurements agent, it will likely expand to include:

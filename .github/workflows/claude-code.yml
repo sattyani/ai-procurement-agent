@@ -1,0 +1,35 @@
+name: Claude Code PR Review
+
+on:
+  issue_comment:
+    types: [created, edited]
+  pull_request_review_comment:
+    types: [created, edited]
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  claude-code:
+    if: contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+      - name: Generate GitHub App Token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      
+      - name: Run Claude Code
+        uses: anthropics/claude-code-pr-action@v1
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+          trigger-phrase: "@claude"
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
