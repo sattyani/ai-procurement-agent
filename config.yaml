@@ -1,0 +1,8 @@
+framework:
+  log_level: INFO
+  
+resource:
+  type: in_memory
+  
+vector:
+  default_model: sentence-transformers/all-MiniLM-L6-v2 
