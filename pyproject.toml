@@ -4,4 +4,13 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "langchain>=0.3.26",
+    "langchain-community>=0.3.27",
+    "langchain-openai>=0.3.27",
+    "langchain-text-splitters>=0.3.0",
+    "python-dotenv>=1.1.1",
+    "superlinked>=29.6.4",
+    "pandas>=2.0.0",
+    "pypdf>=4.0.0",
+]
