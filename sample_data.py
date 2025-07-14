@@ -137,4 +137,4 @@ def run_search_tests(app, procurement_query, sl):
     for _, row in df5.iterrows():
         print(f"   • {row['vendor_name']}: {row['project_name']} (${row['price']:,.0f})")
     
-    print("\n🎉 All search tests completed successfully!") 
+    print("\nAll search tests completed successfully!") 

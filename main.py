@@ -97,50 +97,39 @@ app = executor.run()
 
 
 if __name__ == "__main__":
-    print("Hello, World!")
-    print("✅ Schema created successfully!")
-    print("✅ Vector spaces created successfully!")
-    print("✅ Index created successfully!")
-    print("✅ Query created successfully!")
-    print("✅ Source created successfully!")
-    print("✅ Executor created successfully!")
-    print("✅ App created successfully!")
-    print("🚀 System is LIVE and ready for data!")
-    
-    print(f"\n🔧 Running in {TEST_MODE.upper()} mode...")
     
     if TEST_MODE == "sample":
         # Sample data testing mode
-        print("\n📝 Adding sample vendor proposals...")
         sample_proposals = sample_data.get_sample_proposals()
         source.put(sample_proposals)
-        print("✅ Sample data added successfully!")
-        
-        # Run comprehensive search tests
         sample_data.run_search_tests(app, procurement_query, sl)
         
     elif TEST_MODE == "pdf":
-        # PDF processing mode
-        print("\n📄 PDF processing mode - Processing real proposal files!")
-        
         # Process PDF proposals
         pdf_proposals = pdf_processor.process_pdf_proposals()
         
         if pdf_proposals:
             # Add extracted data to Superlinked
             source.put(pdf_proposals)
-            print("✅ PDF data indexed successfully!")
             
-            # Run PDF-specific search tests
-            pdf_processor.run_pdf_tests(app, procurement_query, sl, pdf_proposals)
-        else:
-            print("❌ No PDF proposals were processed")
-            print("💡 Make sure you have PDF files in data/proposals/ directory")
-        
-    else:
-        print("❌ Invalid TEST_MODE. Please set to 'sample' or 'pdf'")
-        
-    print("\n🎉 All operations completed successfully!")
-    print("🚀 Your AI Procurement Agent is working perfectly!")
+            # Generate comparison report
+            comparison_report = pdf_processor.generate_comparison_report(pdf_proposals)
+            
+            # Generate executive business analysis report
+            balanced_recommendations = pdf_processor.recommend_best_proposals(
+                app, procurement_query, sl, pdf_proposals, 
+                evaluation_profile="balanced", limit=len(pdf_proposals)
+            )
+            
+            executive_report = pdf_processor.generate_executive_summary_report(
+                pdf_proposals, comparison_report, balanced_recommendations
+            )
+            
+            if executive_report and not executive_report.get("error"):
+                # Display executive summary
+                pdf_processor.display_executive_summary(executive_report)
+                
+                # Save executive report
+                pdf_processor.save_executive_summary_report(executive_report)
 
     
